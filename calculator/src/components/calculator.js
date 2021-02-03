@@ -5,24 +5,38 @@ class Calculator extends React.Component{
     constructor(){
         super()
         this.state = ({
-            screen : "Blank"
+            screen : ""
         })
+
+        this.addToScreen = this.addToScreen.bind(this)        
     }
+
+    addToScreen = (newChar) => {        
+        
+        this.setState(prevState => {            
+            return{
+                screen: prevState.screen + newChar
+            }            
+        })        
+        
+    }
+
+
     render(){
         return(            
             <div>
                 {this.state.screen}
             
-                <Button num = {1}/>
-                <Button num = {2}/>
-                <Button num = {3}/>
-                <Button num = {4}/>
-                <Button num = {5}/>
-                <Button num = {6}/>
-                <Button num = {7}/>
-                <Button num = {8}/>
-                <Button num = {9}/>
-                <Button num = {0}/>
+                <Button num = {1} addToScreen = {this.addToScreen}/>
+                <Button num = {2} addToScreen = {this.addToScreen}/>
+                <Button num = {3} addToScreen = {this.addToScreen}/>
+                <Button num = {4} addToScreen = {this.addToScreen}/>
+                <Button num = {5} addToScreen = {this.addToScreen}/>
+                <Button num = {7} addToScreen = {this.addToScreen}/>
+                <Button num = {6} addToScreen = {this.addToScreen}/>
+                <Button num = {8} addToScreen = {this.addToScreen}/>
+                <Button num = {9} addToScreen = {this.addToScreen}/>
+                <Button num = {0} addToScreen = {this.addToScreen}/>
             
             </div>)
     }

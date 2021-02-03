@@ -2,16 +2,12 @@ import React from 'react'
 
 class Button extends React.Component{
     constructor(){
-        super()
-
-        this.addToScreen = this.addToScreen.bind(this)
+        super()  
+        //this.props.addToScreen = this.props.addToScreen.bind(this)      
     }
 
-    addToScreen(){
-        console.log(this.props.num + " was clicked!")
-    }
     render(){
-        return(<button onClick = {this.addToScreen}>{this.props.num}</button>)
+        return(<button onClick = {() => this.props.addToScreen(this.props.num)}>{this.props.num}</button>)
     }
 }
 
