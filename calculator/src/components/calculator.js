@@ -8,7 +8,8 @@ class Calculator extends React.Component{
             screen : ""
         })
 
-        this.addToScreen = this.addToScreen.bind(this)        
+        this.addToScreen = this.addToScreen.bind(this)     
+        this.clearScreen = this.clearScreen.bind(this)   
     }
 
     addToScreen = (newChar) => {        
@@ -17,8 +18,16 @@ class Calculator extends React.Component{
             return{
                 screen: prevState.screen + newChar
             }            
-        })        
-        
+        })                
+    }
+
+    clearScreen(prop){
+
+        this.setState((prevState, props) => {
+            return{
+                screen: ""
+            }
+        })
     }
 
 
@@ -37,6 +46,13 @@ class Calculator extends React.Component{
                 <Button num = {8} addToScreen = {this.addToScreen}/>
                 <Button num = {9} addToScreen = {this.addToScreen}/>
                 <Button num = {0} addToScreen = {this.addToScreen}/>
+
+                <Button num = {'x'} addToScreen = {this.addToScreen}/>
+                <Button num = {'/'} addToScreen = {this.addToScreen}/>
+                <Button num = {'+'} addToScreen = {this.addToScreen}/>
+                <Button num = {'-'} addToScreen = {this.addToScreen}/>
+
+                <Button num = {'Clear'} addToScreen = {this.clearScreen}/>
             
             </div>)
     }
