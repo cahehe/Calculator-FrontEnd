@@ -1,5 +1,6 @@
 import React from 'react'
 import Button from './button'
+import axios from 'axios'
 
 class Calculator extends React.Component{
     constructor(){
@@ -10,6 +11,7 @@ class Calculator extends React.Component{
 
         this.addToScreen = this.addToScreen.bind(this)     
         this.clearScreen = this.clearScreen.bind(this)   
+        this.calculate = this.calculate.bind(this)
     }
 
     addToScreen = (newChar) => {        
@@ -28,6 +30,13 @@ class Calculator extends React.Component{
                 screen: ""
             }
         })
+    }
+
+    calculate(){
+        axios.get("http://localhost:8080/").then(response =>{
+            console.log(response.data)
+        })
+        
     }
 
 
@@ -53,6 +62,7 @@ class Calculator extends React.Component{
                 <Button num = {'-'} addToScreen = {this.addToScreen}/>
 
                 <Button num = {'Clear'} addToScreen = {this.clearScreen}/>
+                <Button num = {'='} addToScreen = {this.calculate}/>
             
             </div>)
     }
