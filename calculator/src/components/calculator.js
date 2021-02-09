@@ -6,37 +6,63 @@ class Calculator extends React.Component{
     constructor(){
         super()
         this.state = ({
-            screen : ""
+            screen : "",
+            urlParam: ""
         })
 
         this.addToScreen = this.addToScreen.bind(this)     
         this.clearScreen = this.clearScreen.bind(this)   
         this.calculate = this.calculate.bind(this)
+        this.sendRequest = this.sendRequest.bind(this)
     }
 
     addToScreen = (newChar) => {        
         
-        this.setState(prevState => {            
-            return{
-                screen: prevState.screen + newChar
-            }            
+        this.setState(prevState => {   
+            let operation = newChar === '+'? "%2B" : newChar
+            if(prevState.urlParam !== "")         
+                return{
+                    screen:     prevState.screen + newChar,
+                    urlParam:   prevState.urlParam + operation
+                }           
+            else
+                return{
+                    screen:     newChar,
+                    urlParam:   operation
+                }
         })                
     }
 
     clearScreen(prop){
 
-        this.setState((prevState, props) => {
+        this.setState((prevState, props) => {            
             return{
-                screen: ""
+                screen:     "",
+                urlParam:   ""
             }
-        })
+        })        
     }
 
     calculate(){
-        axios.get("http://localhost:8080/").then(response =>{
-            console.log(response.data)
+        axios.get(`http://localhost:8080/api/calculate?expression=${this.state.urlParam}`).then(response =>{            
+            this.setState((prevState, props) => {
+                return{
+                    screen: response.data,
+                    urlParam: ""
+                }
+            })
         })
         
+    }
+
+    sendRequest(){
+        if(this.componentDidUpdate)
+            this.calculate()
+    }
+
+    componentDidUpdate(prevProp, prevState){
+        if(this.state.screen !== "")
+            return true
     }
 
 
@@ -56,13 +82,16 @@ class Calculator extends React.Component{
                 <Button num = {9} addToScreen = {this.addToScreen}/>
                 <Button num = {0} addToScreen = {this.addToScreen}/>
 
-                <Button num = {'x'} addToScreen = {this.addToScreen}/>
+                <Button num = {'*'} addToScreen = {this.addToScreen}/>
                 <Button num = {'/'} addToScreen = {this.addToScreen}/>
                 <Button num = {'+'} addToScreen = {this.addToScreen}/>
                 <Button num = {'-'} addToScreen = {this.addToScreen}/>
+                <Button num = {'('} addToScreen = {this.addToScreen}/>
+                <Button num = {')'} addToScreen = {this.addToScreen}/>
 
                 <Button num = {'Clear'} addToScreen = {this.clearScreen}/>
                 <Button num = {'='} addToScreen = {this.calculate}/>
+                <Button num = {'show'} addToScreen = {this.sendRequest}/>
             
             </div>)
     }

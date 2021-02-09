@@ -2,8 +2,7 @@ import React from 'react'
 
 class Button extends React.Component{
     constructor(){
-        super()  
-        //this.props.addToScreen = this.props.addToScreen.bind(this)                
+        super()          
     }    
 
     render(){
