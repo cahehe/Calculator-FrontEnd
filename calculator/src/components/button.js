@@ -6,7 +6,7 @@ class Button extends React.Component{
     }    
 
     render(){
-        return(<button onClick = {() => this.props.addToScreen(this.props.num)}>{this.props.num}</button>)
+        return(<button className = {this.props.className} id = {this.props.id} onClick = {() => this.props.addToScreen(this.props.num)}>{this.props.num}</button>)
     }
 }
 
