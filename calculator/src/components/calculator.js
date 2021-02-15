@@ -45,7 +45,8 @@ class Calculator extends React.Component{
     }
 
     calculate(){
-        axios.get(`http://calculator.api.carloshehe.com:8080/api/calculate?expression=${this.state.urlParam}`).then(response =>{            
+        let url = `http://localhost:8080/api/calculate?expression=` //http://calculator.api.carloshehe.com:8080/api/calculate?expression=`
+        axios.get(`${url}` + `${this.state.urlParam}`).then(response =>{            
             this.setState((prevState, props) => {
                 return{
                     screen: response.data,
